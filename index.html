@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+  }
+</style>
+</head>
+<body>
+
+<button onclick="filterByHouse('All')">Show All</button>
+<button onclick="filterByHouse('Gryffindor')">Gryffindor</button>
+<button onclick="filterByHouse('Slytherin')">Slytherin</button>
+<button onclick="filterByHouse('Hufflepuff')">Hufflepuff</button>
+<button onclick="filterByHouse('Ravenclaw')">Ravenclaw</button>
+
+<table id="characterTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>House</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody">
+    <!-- Table rows will be generated here -->
+  </tbody>
+</table>
+
+<script>
+const characters = [
+  { name: "Harry Potter", house: "Gryffindor", age: 17 },
+  { name: "Hermione Granger", house: "Gryffindor", age: 17 },
+  { name: "Ron Weasley", house: "Gryffindor", age: 17 },
+  { name: "Draco Malfoy", house: "Slytherin", age: 17 },
+  { name: "Cedric Diggory", house: "Hufflepuff", age: 18 },
+  { name: "Luna Lovegood", house: "Ravenclaw", age: 17 }
+];
+
+const tableBody = document.getElementById('tableBody');
+
+function populateTable() {
+  tableBody.innerHTML = '';
+  characters.forEach(character => {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${character.name}</td><td>${character.house}</td><td>${character.age}</td>`;
+    tableBody.appendChild(row);
+  });
+}
+
+populateTable();
+
+function filterByHouse(house) {
+  tableBody.innerHTML = '';
+  if (house === 'All') {
+    populateTable();
+  } else {
+    characters.forEach(character => {
+      if (character.house === house) {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${character.name}</td><td>${character.house}</td><td>${character.age}</td>`;
+        tableBody.appendChild(row);
+      }
+    });
+  }
+}
+</script>
+
+</body>
+</html>
